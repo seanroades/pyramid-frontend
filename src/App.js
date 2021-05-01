@@ -1,9 +1,9 @@
 import logo from './pyramidLogo.gif';
 import React, { Component } from 'react';
 import './App.css';
-import Web3 from 'web3'
-import { Typewriter } from 'react-typewriting-effect'
-import 'react-typewriting-effect/dist/index.css'
+import Web3 from 'web3';
+import { Typewriter } from 'react-typewriting-effect';
+import 'react-typewriting-effect/dist/index.css';
 
 import { PYRAMIDTOKEN_ADDRESS, PYRAMIDTOKEN_ABI } from './config.js'
 
@@ -19,17 +19,18 @@ class App extends Component {
       refTo: '',
       transTo: '',
       loading: '',
-      recongized: false,
       refFrom: '',
-      level: ''
+      level: '',
+      numTrans: 0,
+      isUser: false
     };
     this.handleRefTo= this.handleRefTo.bind(this);
     this.handleTransTo= this.handleTransTo.bind(this);
     this.handleRefFrom= this.handleRefFrom.bind(this);
+    this.handleNumTrans= this.handleNumTrans.bind(this);
     this.refer = this.refer.bind(this)
     this.referred = this.referred.bind(this)
-    this.claim = this.claim.bind(this)
-    this.handleTest = this.handleTest.bind(this)
+    this.transfer = this.transfer.bind(this)
   }
 
   componentDidMount() {
@@ -60,19 +61,14 @@ class App extends Component {
       const level = await pyramidToken.methods.levelOf(this.state.account).call()
       console.log("level: ", level)
       this.setState({ level })
+
+      const isUser = await pyramidToken.methods.isUser(this.state.account).call()
+      console.log("isUser:", isUser)
+      this.setState({ isUser })
     }
     else {
       console.log('false')
     }
-  }
-
-  handleTest() {
-    this.setState({ recongized: true })
-    this.state.pyramidTokenContract.methods.sendEther('0x640B231a3946f778244afd83608192cF5D6C0268').send({from: this.state.account})
-    .once('recept', (recipt) => {
-      this.setState({ recongized: false })
-      console.log(recipt)
-    })
   }
 
   referred() {
@@ -93,9 +89,9 @@ class App extends Component {
     })
   }
 
-  claim() {
+  transfer() {
     this.setState({ loading: true })
-    this.state.pyramidTokenContract.methods.claimTriangles().send({from: this.state.account})
+    this.state.pyramidTokenContract.methods.transfer(this.state.transTo, this.state.numTrans).send({from: this.state.account})
     .once('recept', (recipt) => {
       this.setState({ loading: false })
       console.log(recipt)
@@ -115,6 +111,10 @@ class App extends Component {
     this.setState({transTo: event.target.value});
   }
 
+  handleNumTrans(event) {
+    this.setState({numTrans: event.target.value })
+  }
+
   render() {
     return (
       <div className="App">
@@ -123,47 +123,37 @@ class App extends Component {
           <p className="pyramid">
             Welcome to the Pyramid! {this.state.loading}
           </p>
-          {this.state.recongized ?
+          {!this.state.isUser ?
               <>
-                <p>We don't recongize you as part of our network. You may only enter if someone has referred you.</p>
-                <p className="tooltip">Please enter the wallet address of who referred you</p>
-                <input value={this.state.refFrom} onChange={this.handleRefFrom} className="buttons"></input>
+                <p className="heading">We don't recongize you as part of our network. You may only enter if someone has referred you.</p>
+                <input value={this.state.refFrom} onChange={this.handleRefFrom} className="buttons inputs"></input>
                 <button className="buttons" onClick={this.referred}>Go through with referred request</button>
+                <p className="tooltip">Please enter the wallet address of who referred you above</p>
               </>
             :
             <>
               <Typewriter string={"Welcome to the network, " + this.state.account} delay={50} cursor='_'/>
-              <>
-                <p>We don't recongize you as part of our network. You may only enter if someone has referred you.</p>
-                <p className="tooltip">Please enter the wallet address of who referred you</p>
-                <input value={this.state.refFrom} onChange={this.handleRefFrom} className="buttons"></input>
-                <button className="buttons" onClick={this.referred}>Go through with referred request</button>
-              </>
               
-              <p>Your current balance is:</p>
-              <p className="blink_me">{this.state.balance}</p>
-              <p>The total supply is: </p>
-              <p className="blink_me">{this.state.totalSupply}</p>
+              <div className="dataContainer">
+                <p className="dataText">Your current balance:</p>
+                <p className="blink_me">{this.state.balance / 1000000000000000000}</p>
+
+                <p className="dataText">The total supply: </p>
+                <p className="blink_me">{this.state.totalSupply / 1000000000000000000}</p>
+              </div>
               
               <p className="tooltip">You can refer a user via their wallet address below if you are part of the Pyramid network</p>
-              <input value={this.state.refTo} onChange={this.handleRefTo} className="buttons"></input>
+              <input value={this.state.refTo} onChange={this.handleRefTo} className="buttons inputs"></input>
               <button onClick={this.refer} className="buttons">Recommend user</button>
 
-              <p className="tooltip">You can send triangles to a user's wallet below if you are part of the Pyramid network</p>
-              <input value={this.state.transTo} onChange={this.handleTransTo} className="buttons"></input>
-              <button className="buttons">Send triangles</button>
-
-
-              <p className="tooltip">testing button for wallet shiz</p>
-              <button onClick={this.handleTest} className="buttons">test</button>
-
+              <p className="tooltip">You can send triangles to a user's wallet below if you are part of the Pyramid network (please note this is sent in 18 decimal values, e.g., YOUR_AMOUNT / 10^18; it may be easier to just trade via your metamask or other wallet)</p>
+              <input value={this.state.transTo} onChange={this.handleTransTo} className="buttons inputs"></input>
+              <input value={this.state.numTrans} onChange={this.handleNumTrans} className="buttons"></input>
+              <button onClick={this.transfer} className="buttons">Send triangles</button>
               <br></br>
-              <Typewriter className= "tooltip" string={"The total supply of triangles is currently " + this.state.totalSupply + " triangles."} delay={50} cursor='_'/>
-            
-              <p>Claim triangles</p>
-              <button onClick={this.claim} className="buttons">claim triangles</button>
             </>
           }
+          <br></br>
           </header>
       </div>
     );

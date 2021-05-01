@@ -7,6 +7,22 @@
   pointer-events: none;
 }
 
+.inputs {
+  width: 40%;
+}
+
+.heading {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.dataContainer {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -15,6 +31,11 @@
 
 .blink_me {
   animation: blinker 1s linear infinite;
+  display: inline;
+}
+
+.dataText {
+  display: inline;
 }
 
 @keyframes blinker {

@@ -1,4 +1,4 @@
-export const PYRAMIDTOKEN_ADDRESS = '0x601769BCb4119D2A600adbbFdc5dB42f17E7C6c0';
+export const PYRAMIDTOKEN_ADDRESS = '0xD26520d752f9766d3531589C08a0131CDA6d0135';
 
 export const PYRAMIDTOKEN_ABI = [
   {
@@ -13,8 +13,7 @@ export const PYRAMIDTOKEN_ABI = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x06fdde03"
+    "type": "function"
   },
   {
     "constant": true,
@@ -28,23 +27,7 @@ export const PYRAMIDTOKEN_ABI = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x313ce567"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "__totalSupply",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0x73ba8aff"
+    "type": "function"
   },
   {
     "constant": true,
@@ -58,20 +41,110 @@ export const PYRAMIDTOKEN_ABI = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x95d89b41"
+    "type": "function"
   },
   {
-    "inputs": [
+    "constant": true,
+    "inputs": [],
+    "name": "_owner",
+    "outputs": [
       {
-        "name": "__initialSupply",
-        "type": "uint256"
+        "name": "",
+        "type": "address"
       }
     ],
     "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "payable": false,
     "stateMutability": "nonpayable",
-    "type": "constructor",
-    "signature": "constructor"
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "tokenOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "spender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "tokens",
+        "type": "uint256"
+      }
+    ],
+    "name": "Approval",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "tokens",
+        "type": "uint256"
+      }
+    ],
+    "name": "Transfer",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_referer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "_referee",
+        "type": "address"
+      }
+    ],
+    "name": "walletRefered",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_referee",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "_referer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "_accepted",
+        "type": "bool"
+      }
+    ],
+    "name": "walletAccepted",
+    "type": "event"
   },
   {
     "constant": true,
@@ -79,118 +152,128 @@ export const PYRAMIDTOKEN_ABI = [
     "name": "totalSupply",
     "outputs": [
       {
-        "name": "_totalSupply",
+        "name": "",
         "type": "uint256"
       }
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x18160ddd"
+    "type": "function"
   },
   {
     "constant": true,
     "inputs": [
       {
-        "name": "addr",
-        "type": "address"
-      }
-    ],
-    "name": "referedBy",
-    "outputs": [
-      {
-        "name": "referer",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0xe0fd08a5"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "addr",
+        "name": "tokenOwner",
         "type": "address"
       }
     ],
     "name": "balanceOf",
     "outputs": [
       {
-        "name": "balance",
+        "name": "",
         "type": "uint256"
       }
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x70a08231"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "addr",
-        "type": "address"
-      }
-    ],
-    "name": "levelOf",
-    "outputs": [
-      {
-        "name": "level",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0x5c138c9d"
+    "type": "function"
   },
   {
     "constant": false,
     "inputs": [
       {
-        "name": "_to",
+        "name": "receiver",
         "type": "address"
       },
       {
-        "name": "_value",
+        "name": "numTokens",
         "type": "uint256"
       }
     ],
     "name": "transfer",
     "outputs": [
       {
-        "name": "success",
+        "name": "",
         "type": "bool"
       }
     ],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0xa9059cbb"
+    "type": "function"
   },
   {
     "constant": false,
     "inputs": [
       {
-        "name": "_to",
+        "name": "delegate",
         "type": "address"
+      },
+      {
+        "name": "numTokens",
+        "type": "uint256"
       }
     ],
-    "name": "extendReferral",
+    "name": "approve",
     "outputs": [
       {
-        "name": "success",
+        "name": "",
         "type": "bool"
       }
     ],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x8de74d06"
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "name": "delegate",
+        "type": "address"
+      }
+    ],
+    "name": "allowance",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "name": "buyer",
+        "type": "address"
+      },
+      {
+        "name": "numTokens",
+        "type": "uint256"
+      }
+    ],
+    "name": "transferFrom",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
     "constant": false,
@@ -209,13 +292,17 @@ export const PYRAMIDTOKEN_ABI = [
     ],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x26a1a480"
+    "type": "function"
   },
   {
     "constant": false,
-    "inputs": [],
-    "name": "claimTriangles",
+    "inputs": [
+      {
+        "name": "_to",
+        "type": "address"
+      }
+    ],
+    "name": "extendReferral",
     "outputs": [
       {
         "name": "success",
@@ -224,7 +311,63 @@ export const PYRAMIDTOKEN_ABI = [
     ],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0xe54c1ae5"
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "addr",
+        "type": "address"
+      }
+    ],
+    "name": "referedBy",
+    "outputs": [
+      {
+        "name": "referer",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "addr",
+        "type": "address"
+      }
+    ],
+    "name": "isUser",
+    "outputs": [
+      {
+        "name": "success",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "addr",
+        "type": "address"
+      }
+    ],
+    "name": "levelOf",
+    "outputs": [
+      {
+        "name": "level",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   }
 ]
