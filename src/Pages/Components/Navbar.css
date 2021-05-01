@@ -1,0 +1,33 @@
+.mainbg {
+  background-color: white !important;
+  height: 5vh !important;
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
+.item {
+  width: 30% !important;
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+
+.links {
+  text-decoration: none;
+  color: black;
+  font-weight: 500 !important;
+}
+
+.links:hover {
+  text-decoration: underline;
+  animation: blinker 2s linear infinite !important;
+}
+
+.currentPage {
+  color: #0077ff !important;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0.2;
+  }
+}
