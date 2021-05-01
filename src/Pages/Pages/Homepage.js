@@ -128,7 +128,9 @@ class Homepage extends Component {
           {!this.state.isUser ?
               <>
                 <p className="heading">We don't recongize you as part of our network. You may only enter if someone has referred you.</p>
-                <p className="tooltip">Please connect your metamask wallet and refresh the page. You can see the wallet address if your account is connected here: {this.state.account}</p>
+                <p className="tooltip">Please connect your metamask wallet and refresh the page. You can see the wallet address if your account is connected here:</p>
+                <Typewriter string={ this.state.account ? this.state.account : "Your account is not connected"}></Typewriter>
+                <br></br>
                 <input value={this.state.refFrom} onChange={this.handleRefFrom} className="buttons inputs"></input>
                 <button className="buttons" onClick={this.referred}>Go through with referred request</button>
                 <p className="tooltip">Please enter the wallet address of who referred you above</p>
@@ -156,7 +158,6 @@ class Homepage extends Component {
               <br></br>
             </>
           }
-          <a href="https://github.com/seanroades/pyramid">Source code and more info</a>
           <br></br>
           </header>
       </div>
