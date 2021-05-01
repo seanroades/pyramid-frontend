@@ -12,7 +12,7 @@ function HowToBuy() {
     <div className="bg">
       <Navbar page="howtobuy"/>
       <p className="headingText">How to buy triangle coin</p>
-      <p className="para">1. You are going to first need a metamask wallet</p>
+      <p className="para">1. First, you are going to need a metamask wallet.</p>
       <img className="images" src={metamaskImage}></img>
       <p className="para">2. You can then buy ETH through on of metamasks partners or buy through other means, e.g., from coinbase and then transfer funds to your metamask wallet address.</p>
       <img className="images" src={ethToMetamask}></img>
