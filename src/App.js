@@ -151,6 +151,7 @@ class App extends Component {
               <input value={this.state.numTrans} onChange={this.handleNumTrans} className="buttons"></input>
               <button onClick={this.transfer} className="buttons">Send triangles</button>
               <br></br>
+              <a href="https://github.com/seanroades/pyramid">Source code and more info</a>
             </>
           }
           <br></br>
